@@ -1,0 +1,51 @@
+{% extends 'hotel/customer/main.html' %} {% load static %} {% block content %}
+<div id="content">
+  <div class="container">
+        <div class="col-md-12">
+            <ul class="breadcrumb">
+                <li>
+                <a href="{% url 'home' %}">Home</a>
+                </li>
+                <li>Register</li>
+            </ul>
+        </div>
+
+        <div class="col-md-3">
+            {% include 'hotel/customer/includes/sidebar.html' %}
+        </div>
+        <div class="col-md-9">
+            <div class="box">
+                <h4>Delete Room</h4>
+                
+            </div>
+
+            <div id="content" class="container">
+                <div class="row">
+                <div class="col-sm-4 col-sm-6 center-responsive">
+                        <div class="room">
+                            <a href="">
+                                <img
+                                class="img-responsive"
+                                src="{{obj.room_imageURL}}"
+                                alt="Room 1"
+                                />
+                            </a>
+                            <div class="text">
+                                <form class="form" action="" method="POST">
+                                    <p class="price">{{obj.room_price}}</p>
+                                    {% csrf_token %}
+                                    <p class="price">Are you sure you want to delete "{{obj}}"?</p>
+                                    <p class="button">
+                                        <input class="btn btn-danger" id="btn-danger" type="submit" value="Confirm" />
+                                    </p>
+                                </form>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  
+
+{% endblock content %}

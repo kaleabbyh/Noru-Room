@@ -1,0 +1,255 @@
+{% extends 'hotel/customer/main.html' %} {% load static %} {% block content %}
+
+<div id="content">
+  <div class="container">
+    <div class="col-md-12">
+      <ul class="breadcrumb">
+        <li>
+          <a href="{% url 'home' %}">Home</a>
+        </li>
+        <li>details</li>
+      </ul>
+    </div>
+
+    <div class="col-md-12">
+      <div id="roomMain" class="row">
+        <div class="col-sm-7">
+          <div id="mainImage">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+              <ol class="carousel-indicators">
+                <li
+                  data-target="#myCarousel"
+                  data-slide-to="0"
+                  class="active"
+                ></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+              </ol>
+              <div class="carousel-inner">
+                <div class="item active">
+                  <center>
+                    <img
+                      class="img-responsive"
+                      src="{{room.room_image_1.url}}"
+                      alt="Room 1"
+                    />
+                  </center>
+                </div>
+                <div class="item">
+                  <center>
+                    <img
+                      class="img-responsive"
+                      src="{{room.room_image_2.url}}"
+                      alt="Room 1"
+                    />
+                  </center>
+                </div>
+                <div class="item">
+                  <center>
+                    <img
+                      class="img-responsive"
+                      src="{{room.room_image_3.url}}"
+                      alt="Room 1"
+                    />
+                  </center>
+                </div>
+              </div>
+
+              <a
+                href="#myCarousel"
+                class="left carousel-control"
+                data-slide="prev"
+              >
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a
+                href="#myCarousel"
+                class="right carousel-control"
+                data-slide="next"
+              >
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+            </div>
+          </div>
+          <div class="row" id="thumbs">
+            <div class="col-xs-4">
+              <a
+                data-target="#myCarousel"
+                data-slide-to="0"
+                href="#"
+                class="thumb"
+              >
+                <img
+                  class="img-responsive"
+                  src="{{room.room_image_1.url}}"
+                  alt="Room 1"
+                />
+              </a>
+            </div>
+            <div class="col-xs-4">
+              <a
+                data-target="#myCarousel"
+                data-slide-to="1"
+                href="#"
+                class="thumb"
+              >
+                <img
+                  class="img-responsive"
+                  src="{{room.room_image_2.url}}"
+                  alt="Room 1"
+                />
+              </a>
+            </div>
+
+            <div class="col-xs-4">
+              <a
+                data-target="#myCarousel"
+                data-slide-to="2"
+                href="#"
+                class="thumb"
+              >
+                <img
+                  class="img-responsive"
+                  src="{{room.room_image_3.url}}"
+                  alt="Room 1"
+                />
+              </a>
+            </div>
+          </div>
+
+          <div class="box" id="details">
+            <h4><strong>About room </strong></h4>
+            <p>{{room.room_description}}</p>
+          </div>
+        </div>
+
+        <div class="col-sm-5">
+          <div class="box">
+            <form action="#" class="form-horizontal" method="post">
+              {% csrf_token %}
+              <div class="form-group">
+                <label class="col-md-5 control-label">place name</label>
+                <div class="col-md-7">
+                  <input
+                    type="text"
+                    value="{{room.place.place_name}}"
+                    class="form-control"
+                    disabled
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-md-5 control-label">room name</label>
+                <div class="col-md-7">
+                  <input
+                    type="text"
+                    value="{{room.room_name}}"
+                    class="form-control"
+                    disabled
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-md-5 control-label">room number</label>
+                <div class="col-md-7">
+                  <input
+                    type="text"
+                    value="{{room.room_number}}"
+                    class="form-control"
+                    disabled
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-md-5 control-label">room category</label>
+                <div class="col-md-7">
+                  <input
+                    type="text"
+                    value="{{room.room_category.room_category_name}}"
+                    class="form-control"
+                    disabled
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-md-5 control-label">start date</label>
+                <div class="col-md-7">
+                  <input
+                    type="date"
+                    class="form-control"
+                    name="check_in_date"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-md-5 control-label">end date</label>
+                <div class="col-md-7">
+                  <input
+                    type="date"
+                    class="form-control"
+                    name="check_out_date"
+                    required
+                  />
+                </div>
+              </div>
+
+              <p class="price">{{room.room_price}}</p>
+              <p class="text-center buttons">
+                <button class="btn btn-primary i fa fa-shopping-cart">
+                  Book
+                </button>
+              </p>
+            </form>
+          </div>
+
+          <div class="panel panel-default sidebar-menu">
+            <div class="panel-heading">
+              <h4>Comments</h4>
+            </div>
+            <div class="panel-body">
+              {% for message in room_messages %}
+              <div class="thread__details">
+                @{{message.user.username}} {% if request.user == message.user %}
+
+                <a href="{% url 'delete_message' message.message_id %}"
+                  ><i class="fa fa-remove"></i
+                ></a>
+                <i class="fa fa-pencil"></i>
+
+                {% endif %}
+              </div>
+              <div class="thread__details">
+                {{message.created|timesince}} ago
+              </div>
+              <div class="thread__details">{{message.body}}</div>
+              <br />
+              {% endfor %}
+            </div>
+            {% if request.user.is_authenticated %}
+            <form action="" method="POST">
+              {% csrf_token %}
+              <div class="form-group">
+                <input
+                  name="body"
+                  class="form-control"
+                  placeholder="Write your message here..."
+                />
+              </div>
+            </form>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endblock content%}
+</div>

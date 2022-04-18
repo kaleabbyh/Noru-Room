@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>KF Hotel Booking</title>
+   
+    <link rel="stylesheet" href="{% static 'style/bootstrap-337.min.css' %}">
+    <link rel="stylesheet" href="{% static 'font-awsome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'style/style.css' %}">
+
+    <script type="text/javascript">
+		var user = '{{request.user}}'
+
+		function getToken(name) {
+		    var cookieValue = null;
+		    if (document.cookie && document.cookie !== '') {
+		        var cookies = document.cookie.split(';');
+		        for (var i = 0; i < cookies.length; i++) {
+		            var cookie = cookies[i].trim();
+		            // Does this cookie string begin with the name we want?
+		            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+		                break;
+		            }
+		        }
+		    }
+		    return cookieValue;
+		}
+		var csrftoken = getToken('csrftoken')
+	
+	</script>
+
+</head>
+<body>
+   
+
+   
+   <div id="navbar" class="navbar navbar-default">
+       <div class="container">
+           <div class="navbar-header">
+               <a href="{% url 'homepage' %}" class="navbar-brand home">
+                   <img src="{% static 'img/logo.ico' %}" alt="KF Hotel booking Logo" class="hidden-xs">
+                   <img src="{% static 'img/logo.ico' %}" alt="KF Hotel booking Logo Mobile" class="visible-xs">                  
+               </a>
+               <button class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
+                   <span class="sr-only">Toggle Navigation</span>
+                   <i class="fa fa-align-justify"></i>
+               </button>
+               <button class="navbar-toggle" data-toggle="collapse" data-target="#search">
+                   <span class="sr-only">Toggle Search</span>
+                   <i class="fa fa-search"></i>
+               </button>
+           </div>
+           <div class="navbar-collapse collapse" id="navigation">
+               <div class="padding-nav">
+                   <ul class="nav navbar-nav left">
+                       <li>
+                           <a href="{% url 'home' %}">Home</a>
+                       </li>
+                       <li>
+                           <a href="{% url 'book' %}">rooms</a>
+                       </li>
+                       <li>
+                           <a href="{% url 'register' %}">My Account</a>
+                       </li>
+                       <li>
+                           <a href="{% url 'home' %}">see your book</a>
+                       </li>
+                       <li>
+                           <a href="{% url 'home' %}">Contact Us</a>
+                       </li>
+                   </ul>
+               </div>
+               <a href="{% url 'checkout' %}" class="btn navbar-btn btn-primary right">
+                   <i class="fa fa-book"></i>
+                   <span>  {{bookItems}} bed(s)</span>
+               </a>
+               <div class="navbar-collapse collapse right">
+                   <button class="btn btn-primary navbar-btn" type="button" data-toggle="collapse" data-target="#search">                      
+                       <span class="sr-only">Toggle Search</span>
+                       <i class="fa fa-search"></i>
+                   </button>
+               </div>
+               <div class="collapse clearfix" id="search">
+                   <form method="get" action="results.php" class="navbar-form">
+                       <div class="input-group">
+                           <input type="text" class="form-control" placeholder="Search" name="user_query" required>
+                           
+                           <span class="input-group-btn">                           
+                           <button type="submit" name="search" value="Search" class="btn btn-primary">
+                               <i class="fa fa-search"></i>
+                           </button>                           
+                           </span>
+                       </div>
+                   </form>
+               </div>
+           </div>
+       </div>
+   </div>

@@ -1,0 +1,26 @@
+.home {
+    height: 100vh;
+    background-image: linear-gradient( to right bottom, $color-primary-light, $color-primary-dark), url(../img/defaultBcg.jpeg);
+    background-size: cover;
+    background-position: top;
+    /* clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%); */
+    position: relative;
+    &__logo-box {
+        position: absolute;
+        top: 2rem;
+        left: 1rem;
+        animation-name: moveInRight;
+        animation-duration: 3s;
+    }
+    &__logo {
+        height: 2.5rem;
+    }
+    &__text-box {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        backface-visibility: hidden;
+        text-align: center;
+    }
+}

@@ -1,0 +1,94 @@
+{% extends 'hotel/adminArea/main.html' %}
+{% load static %}
+
+{% block content %}
+   <div id="content">
+    <div class="container">
+        <div class="col-md-12">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="{% url 'home' %}">Home</a>
+                </li>
+                <li>
+                    Register
+                </li>
+            </ul>
+        </div>           
+        
+        <div class="col-md-3">
+            {% include 'hotel/adminArea/includes/sidebar.html' %}
+       </div>
+
+       <div class="col-md-9">
+        <div class="box">
+            <div class="box-header">
+                <center>
+                    <h4><strong> {{room_operation}}<strong </h4>
+                </center>
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    
+                    <div class="form-group">
+                        <label for="place_name">place name</label>
+                        <select name="place_name" id="place_name" class="form-control">
+                            {% for place in places %}
+                            <option>{{place.place_name}}</option>
+                            {% endfor %}
+                        </select>
+                     </div>
+
+                    {% comment %} {{rooms.room_category.room_category_name}} {% endcomment %}
+                    <div class="form-group">
+                        <label for="room_category">room category</label>
+                      <select name="room_category" id="" class="form-control" id="room_category">
+                            {% for room_category in room_categorys %}
+                            <option >{{room_category.room_category_name}}</option>
+                            {% endfor %}
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="room_price">Room price</label>
+                        <input type="text" class="form-control" id="room_price" name="room_price" value="{{rooms.room_price}}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="room_id">Room id</label>
+                        <input type="text" class="form-control" id="room_id" name="room_id" value="{{rooms.room_id}}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="room_number">Room number</label>
+                        <input type="text" class="form-control" id="room_number" name="room_number" value="{{rooms.room_number}}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="room_name">Room name</label>
+                        <input type="text" class="form-control" id="room_name" name="room_name" value="{{rooms.room_name}}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="room_description">Room description</label>
+                        <input type="" class="form-control" id="room_description" name="room_description" value="{{rooms.room_description}}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="room_image">Room Image</label>
+                        <input type="file" class="form-control" id="room_image" name="room_image" value="{{rooms.room_image}}" required>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" name="submit" class="btn btn-primary"> submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+</div>
+
+
+{% endblock content %}

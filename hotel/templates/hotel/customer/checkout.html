@@ -1,0 +1,136 @@
+{% extends 'hotel/customer/main.html' %}
+{% load static %}
+{% block content %}
+   
+   <div id="content">
+       <div class="container">
+           <div class="col-md-12">
+               <ul class="breadcrumb">
+                   <li>
+                       <a href="{% url 'home' %}">Home</a>
+                   </li>
+                   <li>
+                       booking details
+                   </li>
+               </ul>
+           </div>
+           <div id="book" class="col-md-9">
+               <div class="box">
+                   <form action="" method="post" enctype="multipart/form-data">
+                       
+                       <div class="table-responsive">
+                           <table class="table">
+                               
+                               <thead>
+                                   <tr>
+                                       <th >bed</th>
+                                       <th>bed number</th>
+                                       <th>Quantity</th>
+                                       <th>price</th>
+                                       <th>categorey</th>
+                                       <th >Sub-Total</th>
+                                       <th>Delete</th>
+                                   </tr>
+                               </thead>
+                               {% for item in items  %}
+                               <tbody>
+                                  
+                                   <tr>
+                                       <td>
+                                        <a href="/details/{{item.bed.id}}">
+                                            <img class="img-responsive" src="{{item.bed.imageURL}}" alt="Room 1">                       
+                                        </a>
+                                       </td>
+                                       <td>
+                                        <a href="/details/{{item.bed.id}}">{{item.bed.bednumber}}</a>
+                                       </td>
+                                       <td>
+                                          {{item.quantity}}
+                                       </td>
+                                       <td>
+                                           {{item.bed.price}}
+                                       </td>
+                                       <td>
+                                           {{item.bed.bedcatagory.name}}
+                                       </td>
+                                       
+                                       <td>
+                                           {{item.get_total}}
+                                       </td>
+                                       <td>
+                                        <a href="{% url 'checkout' %}" class=" btn-outline-danger">
+                                            <i data-bed="{{item.bed.id}}" data-action="remove" class="chg-quantity update-book">delete</i>
+                                        </a>
+                                       </td>
+                                       
+                                   </tr>
+                                   
+                               </tbody><!-- tbody Finish -->
+                               {% endfor %}
+                               <tfoot>
+                                   <tr>
+                                       <th colspan="5">Total</th>
+                                       <th colspan="2">{{order.get_order_total}}birr</th>
+                                   </tr>
+                               </tfoot>
+                               
+                           </table>
+                       </div><!-- table-responsive Finish -->
+                       
+                       <div class="box-footer">
+                           <div class="pull-left">
+                               <a href="{% url 'home' %}" class="btn btn-primary">
+                                   <i class="fa fa-chevron-left"></i> Continue booking
+                               </a>
+                           </div>
+                           <div class="pull-right">
+                               <button type="submit" name="update" value="Update book" class="btn btn-primary">
+                                <a href="{% url 'checkout' %}" >
+                                   <i class="fa fa-refresh"></i> Update book
+                                </a>
+                               </button>
+                               <a href="#" class="btn btn-primary">
+                                   Proceed Checkout <i class="fa fa-chevron-right"></i>
+                               </a>
+                           </div>
+                       </div>
+                   </form>
+               </div>
+           </div><!-- col-md-9 Finish -->
+           
+           <div class="col-md-3"><!-- col-md-3 Begin -->
+               <div id="order-summary" class="box">
+                   <div class="box-header">
+                       <h3>Order Summary</h3>
+                   </div>
+                   <p class="text-muted">
+                       booking and additional costs are calculated based on value you have entered
+                   </p>
+                   <div class="table-responsive">
+                       <table class="table">
+                           <tbody>
+                               <tr>
+                                   <td> Order Sub-Total </td>
+                                   <th> {{order.get_order_total}}birr </th>
+                               </tr>
+                               <tr>
+                                   <td> number of beds </td>
+                                   <td> {{order.get_order_items}} beds</td>
+                               </tr>
+                               <tr>
+                                   <td> Tax </td>
+                                   <th> 0 </th>
+                               </tr>
+                               <tr class="total">
+                                   <td> Total </td>
+                                   <th>{{order.get_order_total}}birr</th>
+                               </tr>
+                           </tbody>
+                       </table>
+                   </div>
+               </div>
+           </div>
+       </div><!-- container Finish -->
+   </div><!-- #content Finish -->
+   
+{% endblock content %}

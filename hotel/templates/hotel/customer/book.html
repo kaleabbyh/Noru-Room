@@ -1,0 +1,72 @@
+{% extends 'hotel/customer/main.html' %}
+{% load static %}
+{% block content %}
+
+   <div id="content">
+       <div class="container">
+           <div class="col-md-12">
+               <ul class="breadcrumb">
+                   <li>
+                       <a href="{% url 'home' %}">Home</a>
+                   </li>
+                   <li>
+                       book
+                   </li>
+               </ul>
+           </div>
+
+
+           <div class="col-md-3">
+                {% include 'hotel/customer/includes/sidebar.html' %}
+           </div>
+
+
+           <div class="col-md-9">
+               <div class="box">
+                   <h4>Book your choose</h4>
+                   <p>
+                       reserve your home
+                   </p>
+               </div>
+
+               <div class="row">
+                {% for room in rooms  %}
+                <div class="col-sm-6 col-sm-6 center-responsive">
+                    <div class="room">
+                        <a href="{% url 'details' room.room_id %}">
+                            <img class="img-responsive" src="{{room.room_image_1.url}}" alt="Room 1">                       
+                        </a>
+                        <div class="text">
+                            <p class="price">{{room.room_price}}</p>
+                            <p class="button">
+                                
+                                <a href="{% url 'details' room.room_id %}" class="btn btn-default">details</a>
+                                <button data-room="{{room.room_id}}" data-action="add" class="btn btn btn-default add-btn update-book">book</button>
+                            </p>
+                        </div>
+                    </div>
+              </div>
+        
+              {% endfor %}
+
+               </div><!-- row Finish -->
+               
+               <center>
+                   <ul class="pagination">
+                       <li><a href="#">First Page</a></li>
+                       <li><a href="#">1</a></li>
+                       <li><a href="#">2</a></li>
+                       <li><a href="#">3</a></li>
+                       <li><a href="#">4</a></li>
+                       <li><a href="#">5</a></li>
+                       <li><a href="#">Last Page</a></li>
+                   </ul>
+               </center>
+               
+           </div>
+       </div>
+   </div>
+   
+    
+    
+{% endblock content %}

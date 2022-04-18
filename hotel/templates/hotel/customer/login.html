@@ -1,0 +1,64 @@
+{% extends 'hotel/customer/main.html' %}
+{% load static %}
+{% block content %}
+
+<div id="content">
+    <div class="container">
+        <div class="col-md-12">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="{% url 'home' %}">Home</a>
+                </li>
+                <li>
+                    login
+                </li>
+            </ul>
+        </div>  
+
+        <div class="col-md-3">
+            {% comment %} {% include 'hotel/customer/includes/sidebar.html' %} {% endcomment %}
+        </div> 
+
+
+        <div class="col-md-6">
+        <div class="panel panel-default sidebar-menu">
+            <center>
+               <div class="panel-heading">
+                    <h3> login </h3>
+                </div>
+            </center>
+                
+             <div class="panel-body">
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label> username </label>
+                        <input name="username" type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label> Password </label>
+                        <input name="password" type="password" class="form-control" required>
+                    </div>
+                    <div class="text-center">
+                        <button name="login" value="login" class="btn btn-primary">
+                            <i class="fa fa-sign-in"></i> login
+                        </button>
+                    </div>
+                    {% if errormessage %}
+                        <p style="color: red">{{errormessage}}</p>
+                        <br />
+                    {% endif %}
+                </form>
+            </div>
+            <center>
+                <a href="{% url 'register' %}">
+                    <h4> Dont have account..? Register here </h4>
+                </a> 
+            </center>
+          </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
